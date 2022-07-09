@@ -1,0 +1,7 @@
+nav{
+    z-index:100;
+}
+.logout{
+    border: none !important;
+    background-color: #f8f9fa !important;
+}

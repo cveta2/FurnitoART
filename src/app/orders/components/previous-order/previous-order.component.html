@@ -1,0 +1,31 @@
+<div class="container text-center mt-5 pt-5">
+    <h1>Your previous orders</h1>
+    <ng-container *ngIf="orders.length != 0; else noOrders">
+        <table class="table table-warning table-striped mt-3">
+            <thead>
+                <th>Order number</th>
+                <th>Address</th>
+                <th>Order items</th>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let order of orders">
+                    <tr>
+                        <td>{{ order.orderNumber }}</td>
+                        <td>{{ order.address }} {{ order.city }}, {{ order.country }}</td>
+                        <td>
+                            <ng-container *ngFor="let item of order.orderItems">
+                                <p>{{ item.productName }}({{ item.quantity }})</p>
+                            </ng-container>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </ng-container>
+    <ng-template #noOrders>
+        <p class="alert alert-danger">You don't have any previous orders.</p>
+    </ng-template>
+
+
+    <a routerLink="/cart" class="btn btn-primary text-start">Back to cart</a>
+</div>

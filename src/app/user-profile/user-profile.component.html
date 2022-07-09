@@ -1,0 +1,40 @@
+<div class="container  mt-5 pt-5">
+    <h1 class="text-center mb-4">Your profile</h1>
+    <table class="table">
+        <tr>
+            <td class="border-end text-end pe-3">
+                <p>Your information</p>
+                <button class="btn btn-primary" (click)="showFormForUpdateInfo()">Change info</button>
+            </td>
+            <td class="ps-3">
+                <p><span class="cl-gold">First name: </span> {{user.firstName}}</p>
+                <p><span class="cl-gold">Last name: </span>{{user.lastName}}</p>
+                <p><span class="cl-gold">Email: </span>{{user.email}}</p>
+            </td>
+        </tr>
+    </table> 
+    <form #formDirective="ngForm" [formGroup]="service.form" (ngSubmit)="onSubmit()" class="mt-5 text-center" [style.display]="isVisibleForm ? 'block' : 'none'">
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>First name</mat-label>
+            <input matInput placeholder="First name" formControlName="firstName">
+            <mat-error *ngIf="service.form.get('firstName')?.hasError('required')">First name is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Last name</mat-label>
+            <input matInput placeholder="Last name" formControlName="lastName">
+            <mat-error *ngIf="service.form.get('lastName')?.hasError('required')">Last name is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" formControlName="email">
+            <mat-error *ngIf="service.form.get('email')?.hasError('required')">Email is required</mat-error>
+            <mat-error *ngIf="service.form.get('email')?.hasError('email')">Email is not in correct format</mat-error>
+        </mat-form-field>
+        <div class=text-center>
+            <button type="submit" mat-raised-button color="primary" [disabled]="service.form.invalid">Save changes</button>
+        </div>
+        <ng-container *ngIf="errorMessage">
+            <p class="error">{{ errorMessage }}</p>
+        </ng-container>
+    </form>  
+</div>
